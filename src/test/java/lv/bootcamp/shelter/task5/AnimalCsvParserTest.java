@@ -183,6 +183,7 @@ class AnimalCsvParserTest {
         @DisplayName("parses valid rows and counts skipped rows")
         void shouldParseFileAndCountSkipped() throws IOException {
             Path tempFile = Files.createTempFile("test-intake", ".csv");
+            tempFile.toFile().deleteOnExit();
             String content = """ 
                     name,species,age,vaccinated,intakeDate
                     Buddy,Dog,0,true,2026-01-15
@@ -202,6 +203,7 @@ class AnimalCsvParserTest {
         @DisplayName("returns empty result for file with only a header")
         void shouldReturnEmptyForHeaderOnly() throws IOException {
             Path tempFile = Files.createTempFile("test-intake", ".csv");
+            tempFile.toFile().deleteOnExit();
             String content = """ 
                     name,species,age,vaccinated,intakeDate
                     """;
