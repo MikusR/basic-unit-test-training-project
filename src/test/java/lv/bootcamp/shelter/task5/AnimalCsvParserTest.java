@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -181,9 +182,8 @@ class AnimalCsvParserTest {
 
         @Test
         @DisplayName("parses valid rows and counts skipped rows")
-        void shouldParseFileAndCountSkipped() throws IOException {
-            Path tempFile = Files.createTempFile("test-intake", ".csv");
-            tempFile.toFile().deleteOnExit();
+        void shouldParseFileAndCountSkipped(@TempDir Path tempDir) throws IOException {
+            Path tempFile = tempDir.resolve("test-intake.csv");
             String content = """ 
                     name,species,age,vaccinated,intakeDate
                     Buddy,Dog,0,true,2026-01-15
@@ -201,9 +201,8 @@ class AnimalCsvParserTest {
 
         @Test
         @DisplayName("returns empty result for file with only a header")
-        void shouldReturnEmptyForHeaderOnly() throws IOException {
-            Path tempFile = Files.createTempFile("test-intake", ".csv");
-            tempFile.toFile().deleteOnExit();
+        void shouldReturnEmptyForHeaderOnly(@TempDir Path tempDir) throws IOException {
+            Path tempFile = tempDir.resolve("test-intake.csv");
             String content = """ 
                     name,species,age,vaccinated,intakeDate
                     """;
