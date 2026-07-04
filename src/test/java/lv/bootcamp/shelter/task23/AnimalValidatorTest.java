@@ -138,7 +138,7 @@ class AnimalValidatorTest {
         @DisplayName("does not throw for fully valid animal")
         void shouldPassForValidAnimal() {
             Animal animal = new Animal("Buddy","Dog",3,true, LocalDate.now());
-            assertThrows(IllegalArgumentException.class,()->validator.validate(animal));
+            assertDoesNotThrow(()->validator.validate(animal));
         }
     }
 }
