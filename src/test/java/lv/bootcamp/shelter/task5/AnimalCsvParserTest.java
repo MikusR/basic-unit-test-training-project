@@ -52,12 +52,12 @@ class AnimalCsvParserTest {
 
             assertThat(result).isPresent();
 
-            Animal animal =result.get();
+            Animal animal = result.get();
             assertThat(animal.getName()).isEqualTo("Buddy");
             assertThat(animal.getSpecies()).isEqualTo("Dog");
             assertThat(animal.getAge()).isEqualTo(3);
             assertThat(animal.isVaccinated()).isEqualTo(true);
-            assertThat(animal.getIntakeDate()).isEqualTo(LocalDate.of(2026,1,15));
+            assertThat(animal.getIntakeDate()).isEqualTo(LocalDate.of(2026, 1, 15));
 
         }
 
@@ -68,7 +68,7 @@ class AnimalCsvParserTest {
 
             assertThat(result).isPresent();
 
-            Animal animal =result.get();
+            Animal animal = result.get();
             assertThat(animal.getName()).isEqualTo("Buddy");
 
         }
@@ -80,7 +80,7 @@ class AnimalCsvParserTest {
 
             assertThat(result).isPresent();
 
-            Animal animal =result.get();
+            Animal animal = result.get();
             assertThat(animal.isVaccinated()).isEqualTo(false);
         }
     }
