@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Stretch goal: Testing file output
@@ -72,5 +73,23 @@ class AnimalReportWriterTest {
         writer.writeReport(animals, output);
         List<String> content = Files.readAllLines(output, StandardCharsets.UTF_8);
         assertThat(content).containsSequence("Dog: Max (age 5)");
+    }
+    @Test
+    @DisplayName("writes oldest animal per species")
+    void shouldVerifyMethodCallWithSpy(@TempDir Path tempDir) throws IOException {
+        Animal buddy = new Animal("Buddy", "Dog", 3, true, LocalDate.of(2026, 1, 15));
+        Animal luna = new Animal("Luna", "Cat", 2, true, LocalDate.of(2026, 1, 10));
+        Animal max = new Animal("Max", "Dog", 5, false, LocalDate.of(2026, 1, 20));
+        List<Animal> animals = List.of(buddy, luna, max);
+
+        Path output = tempDir.resolve("report-test.txt");
+        AnimalReportWriter spyWriter = spy(writer);
+
+        spyWriter.writeReport(animals, output);
+
+        verify(spyWriter, times(1)).writeReport(animals, output);
+        assertThat(output).exists();
+        List<String> content = Files.readAllLines(output, StandardCharsets.UTF_8);
+        assertThat(content).containsSequence("Total animals: 3");
     }
 }
