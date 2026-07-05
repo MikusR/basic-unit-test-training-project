@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.*;
 
 /**
  * Stretch goal: Testing file output
- * <p>
+ *
  * Practice:
  * - Writing to temp files and reading them back
  * - String content assertions
  * - Cleanup with Files.deleteIfExists
- * <p>
+ *
  * Instructions:
  * These tests verify that AnimalReportWriter produces correct output.
  * This task is optional — attempt it after completing tasks 1–6.
