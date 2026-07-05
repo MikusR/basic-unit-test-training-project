@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Task 4: Collection and sorting tests
@@ -125,5 +125,39 @@ class AnimalSorterTest {
         assertThat(sorted)
                 .extracting(Animal::getName)
                 .containsExactly("Luna", "Bella", "Max", "Buddy");
+    }
+
+    //Tests for Task 8
+    @Test
+    @DisplayName("sortByName: returns empty list for null input")
+    void sortByName_shouldReturnEmptyForNullInput() {
+        assertThat(sorter.sortByName(null)).isEmpty();
+    }
+    @Test
+    @DisplayName("sortByName: returns empty list for empty input")
+    void sortByName_shouldReturnEmptyForEmptyInput() {
+        assertThat(sorter.sortByName(List.of())).isEmpty();
+    }
+
+    @Test
+    @DisplayName("sortByIntakeDate: returns empty list for null input")
+    void sortByIntakeDate_shouldReturnEmptyForNullInput() {
+        assertThat(sorter.sortByIntakeDate(null)).isEmpty();
+    }
+    @Test
+    @DisplayName("sortByIntakeDate: returns empty list for empty input")
+    void sortByIntakeDate_shouldReturnEmptyForEmptyInput() {
+        assertThat(sorter.sortByIntakeDate(List.of())).isEmpty();
+    }
+
+    @Test
+    @DisplayName("sortBySpeciesThenAgeDescending: returns empty list for null input")
+    void sortBySpeciesThenAgeDescending_shouldReturnEmptyForNullInput() {
+        assertThat(sorter.sortBySpeciesThenAgeDescending(null)).isEmpty();
+    }
+    @Test
+    @DisplayName("sortBySpeciesThenAgeDescending: returns empty list for empty input")
+    void sortBySpeciesThenAgeDescending_shouldReturnEmptyForEmptyInput() {
+        assertThat(sorter.sortBySpeciesThenAgeDescending(List.of())).isEmpty();
     }
 }

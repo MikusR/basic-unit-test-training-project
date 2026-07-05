@@ -220,5 +220,17 @@ class AnimalCsvParserTest {
             assertThatThrownBy(() -> parser.parseFile(Path.of("does-not-exist.csv")))
                     .isInstanceOf(IOException.class);
         }
+        @Test
+        @DisplayName("returns empty result for empty file without header")
+        // Task 8
+        void shouldReturnEmptyForEmptyFile(@TempDir Path tempDir) throws IOException {
+            Path emptyFile = tempDir.resolve("empty.csv");
+            Files.createFile(emptyFile);
+
+            AnimalCsvParser.ParseResult result = parser.parseFile(emptyFile);
+
+            assertThat(result.animals()).isEmpty();
+            assertThat(result.skippedRows()).isEqualTo(0);
+        }
     }
 }
